@@ -92,8 +92,17 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 用户管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a id="user-student" href="" type="button">学生管理</a>
-                                    <a id="user-teacher" href="" type="button">教师管理</a>
+                                    <a id="user-student" href="#" type="button">学生管理</a>
+                                    <a id="user-teacher" href="#" type="button">教师管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 公告管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="notice-add" href="#" type="button">通知管理</a>
+                                    <a id="user-teacher" href="#" type="button">Q&A管理</a>
                                 </li>
                             </ul>
                         </li>

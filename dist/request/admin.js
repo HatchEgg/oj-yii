@@ -228,3 +228,15 @@ $("#contest-add").click(function(event){
 		}
 	})
 });
+
+$("#notice-add").click(function(event){
+	$.ajax({
+		url:"index.php?r=notice/add",
+		type:"GET",
+		data:{},
+		success:function(result)
+		{
+			$('#page-wrapper').html(result);
+		}
+	})
+});

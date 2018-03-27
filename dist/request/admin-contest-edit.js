@@ -114,5 +114,3 @@ $("#contestant-search-btn-c").click(function(event){
         }
     })
 });
-$()
-
