@@ -14,4 +14,7 @@ class NoticeController extends Controller {
 	public function actionAdd(){
 		echo $this->renderPartial('add.php');
 	}
+	public function actionQanda(){
+		echo $this->renderPartial('qanda.php');
+	}
 }

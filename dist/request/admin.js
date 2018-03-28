@@ -240,3 +240,15 @@ $("#notice-add").click(function(event){
 		}
 	})
 });
+
+$("#notice-QandA").click(function(event){
+	$.ajax({
+		url:"index.php?r=notice/qanda",
+		type:"GET",
+		data:{},
+		success:function(result)
+		{
+			$('#page-wrapper').html(result);
+		}
+	})
+});

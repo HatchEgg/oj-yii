@@ -50,28 +50,28 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 id="panel-title"></h4>
                 </div>
-                <div class="modal-body">
-                    <form class="form" id="notice-form">
+                <form class="form" id="notice-form">
+                    <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="control-label" for="notice-title">标题：</label>
-                                    <input class="form-control" type="text" name="notice-title">
+                                    <input class="form-control" type="text" name="notice-title" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="control-label" for="notice-content">内容：</label>
-                                    <textarea class="form-control" type="text" name="notice-content" rows="20"></textarea>
+                                    <textarea class="form-control" type="text" name="notice-content" rows="20" required></textarea>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="save-notice-bt">保存</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="save-notice-bt">保存</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

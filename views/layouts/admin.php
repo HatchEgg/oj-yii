@@ -32,6 +32,8 @@
     <link href="../vendor/daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- Overflow -->
     <link href="../dist/css/oj-admin-overflow-hide.css" rel="stylesheet">
+    <!-- Simditor -->
+    <link href="../vendor/simditor/css/simditor.css" rel="stylesheet">
 
 </head>
 <body>
@@ -102,7 +104,7 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a id="notice-add" href="#" type="button">通知管理</a>
-                                    <a id="user-teacher" href="#" type="button">Q&A管理</a>
+                                    <a id="notice-QandA" href="#" type="button">Q&amp;A管理</a>
                                 </li>
                             </ul>
                         </li>
