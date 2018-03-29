@@ -2,6 +2,6 @@ var toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontSca
 
 var editor = new Simditor({
     textarea: $('#Q-and-A-content'),
-    placeholder: "Input Q&A",
+    placeholder: "在此处输入Q&A文档。",
     toolbar: toolbar
 });

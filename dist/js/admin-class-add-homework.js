@@ -8,10 +8,10 @@ function cancelAll(){
 }
 //搜索结果多选
 function multicheck_p(){
-$('#search-result-table-m tr').slice(1).click(function(event) {
-    //alert();
-    $(this).toggleClass('info');
-});
+    $('#search-result-table-m tr').slice(1).click(function(event) {
+        //alert();
+        $(this).toggleClass('info');
+    });
 }
 //Load datarangepicker
 $('#add-homework-time').daterangepicker(
@@ -25,7 +25,6 @@ $('#add-homework-time').daterangepicker(
 function(start, end, label) {
     //alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 });
-
 /*
 //homework search
 //homework problem search selected
@@ -63,13 +62,15 @@ $('#add-problems-m').click(function(event) {
     var resultRows = searchResult.find('.info');
     //alert(resultRows.html());
     for(var i = 0; i < resultRows.length; i++){
-        homeworkProblemTable.row.add( [
-            resultRows.eq(i).find('td').eq(0).html(),
-            resultRows.eq(i).find('td').eq(1).html(),
-            resultRows.eq(i).find('td').eq(2).html(),
-            '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
-            '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
-        ] ).draw();
+        if(isExisted(homeworkProblemTable, resultRows.eq(i).find('td').eq(0).html())){
+            homeworkProblemTable.row.add( [
+                resultRows.eq(i).find('td').eq(0).html(),
+                resultRows.eq(i).find('td').eq(1).html(),
+                resultRows.eq(i).find('td').eq(2).html(),
+                '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
+                '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
+            ] ).draw();
+        }
     }
     $('#search-result').modal('hide');
     $('#search-result-table-m tr').slice(1).removeClass('info');
@@ -94,4 +95,19 @@ function addResult(data){
     console.log(h);
     $('#search-result-table-m').find('tbody').append(h);
     multicheck_p();
+}
+function isExisted(table, str){
+    var array = table.columns(0).data()[0];
+    // console.log(array.length + '-----------');
+    var i = 0;
+    var I = array.length
+    for(i = 0; i < I; i++){
+        // console.log(array[i]);
+        if(array[i] == str)
+            break;
+    }
+    if(i < I)
+        return false;
+    else
+        return true;
 }

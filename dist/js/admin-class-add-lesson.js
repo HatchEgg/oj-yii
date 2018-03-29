@@ -45,9 +45,6 @@ $('#lesson-search-button').click(function(event) {
 	var searchInput = $("#lesson-search").text();
 });
 */
-
-
-
 var lessonProblemTable = $('#lesson-problem-table').DataTable({
     responsive: true,
     createdRow: function(row,data,index) {
@@ -65,13 +62,15 @@ $('#add-problems-m').click(function(event) {
     var resultRows = searchResult.find('.info');
     //alert(resultRows.html());
     for(var i = 0; i < resultRows.length; i++){
-        lessonProblemTable.row.add( [
-            resultRows.eq(i).find('td').eq(0).html(),
-            resultRows.eq(i).find('td').eq(1).html(),
-            resultRows.eq(i).find('td').eq(2).html(),
-            '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
-            '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
-        ] ).draw();
+        if(isExisted(lessonProblemTable,resultRows.eq(i).find('td').eq(0).html())){
+            lessonProblemTable.row.add( [
+                resultRows.eq(i).find('td').eq(0).html(),
+                resultRows.eq(i).find('td').eq(1).html(),
+                resultRows.eq(i).find('td').eq(2).html(),
+                '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
+                '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
+            ] ).draw();
+        }
     }
     $('#search-result').modal('hide');
     $('#search-result-table-m tr').slice(1).removeClass('info');
@@ -94,4 +93,19 @@ function addResult(data){
     }
     $('#search-result-table-m').find('tbody').append(h);
     multicheck_p();
+}
+function isExisted(table, str){
+    var array = table.columns(0).data()[0];
+    // console.log(array.length + '-----------');
+    var i = 0;
+    var I = array.length
+    for(i = 0; i < I; i++){
+        // console.log(array[i]);
+        if(array[i] == str)
+            break;
+    }
+    if(i < I)
+        return false;
+    else
+        return true;
 }

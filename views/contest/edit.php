@@ -47,8 +47,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button id="cancel-all" onclick="cancelAll()" type="button" class="btn btn-warning">全不</button>
-                    <button id="check-all" onclick="checkAll()" type="button" class="btn btn-info">全选</button>
+                    <button id="cancel-all-p" onclick="cancelAll_p()" type="button" class="btn btn-warning">全不</button>
+                    <button id="check-all-p" onclick="checkAll_p()" type="button" class="btn btn-info">全选</button>
                     <button id="add-problems-p" type="button" class="btn btn-primary">添加</button>
                 </div>
             </div>
@@ -127,8 +127,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button id="cancel-all" onclick="cancelAll()" type="button" class="btn btn-warning">全不</button>
-                    <button id="check-all" onclick="checkAll()" type="button" class="btn btn-info">全选</button>
+                    <button id="cancel-all-c" onclick="cancelAll_c()" type="button" class="btn btn-warning">全不</button>
+                    <button id="check-all-c" onclick="checkAll_c()" type="button" class="btn btn-info">全选</button>
                     <button id="add-contestants-c" type="button" class="btn btn-primary">添加</button>
                 </div>
             </div>

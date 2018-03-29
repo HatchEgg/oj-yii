@@ -42,11 +42,13 @@ $('#add-students-m').click(function(event) {
     var resultRows = searchResult.find('.info');
     //alert(resultRows.length);
     for(var i = 0; i < resultRows.length; i++){
-        classAddStuTable.row.add( [
-            resultRows.eq(i).find('td').eq(0).html(),
-            resultRows.eq(i).find('td').eq(1).html(),
-            '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>'
-        ] ).draw();
+        if(isExisted(classAddStuTable,resultRows.eq(i).find('td').eq(0).html().toString())){
+            classAddStuTable.row.add( [
+                resultRows.eq(i).find('td').eq(0).html(),
+                resultRows.eq(i).find('td').eq(1).html(),
+                '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>'
+            ] ).draw();
+        }
     }
     $('#search-result').modal('hide');
     $('#search-result-table-m tr').slice(1).removeClass('info');
@@ -72,8 +74,23 @@ function addResult(data){
     $('#search-result-table-m').find('tbody').html('');
     var h = "";
     for(var i = 0; i < data.length; i++){
-        h += '<tr>' + '<td>' + data[i].number + '</td>' + '<td>' + data[i].name + '</td>' + '<td>' + data[i].class + '</td>' + '</tr>';
+            h += '<tr>' + '<td>' + data[i].number + '</td>' + '<td>' + data[i].name + '</td>' + '<td>' + data[i].class + '</td>' + '</tr>';
     }
     $('#search-result-table-m').find('tbody').append(h);
     multicheck();
+}
+function isExisted(table, str){
+    var array = table.columns(0).data()[0];
+    // console.log(array.length + '-----------');
+    var i = 0;
+    var I = array.length
+    for(i = 0; i < I; i++){
+        // console.log(array[i]);
+        if(array[i] == str)
+            break;
+    }
+    if(i < I)
+        return false;
+    else
+        return true;
 }

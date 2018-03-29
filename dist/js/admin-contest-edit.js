@@ -1,3 +1,4 @@
+console.log("contest edit");
 $('.daterangepicker').remove();
 $('input[name="contest-time"]').daterangepicker(
 {
@@ -34,10 +35,10 @@ $('#contest-secret').change(function(event) {
 //问题多选
 multicheck_p();
 //题目添加
-function checkAll() {
+function checkAll_p() {
     $('#search-result-table-p tr').slice(1).addClass('info');
 }
-function cancelAll(){
+function cancelAll_p(){
     $('#search-result-table-p tr').slice(1).removeClass('info');
 }
 function multicheck_p(){
@@ -64,13 +65,15 @@ $('#add-problems-p').click(function(event) {
     var resultRows = searchResultp.find('.info');
     //alert(resultRows.html());
     for(var i = 0; i < resultRows.length; i++){
-        porblemTable.row.add( [
-            resultRows.eq(i).find('td').eq(0).html(),
-            resultRows.eq(i).find('td').eq(1).html(),
-            resultRows.eq(i).find('td').eq(2).html(),
-            '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
-            '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
-        ] ).draw();
+        if(isExisted(porblemTable, resultRows.eq(i).find('td').eq(0).html())){
+            porblemTable.row.add( [
+                resultRows.eq(i).find('td').eq(0).html(),
+                resultRows.eq(i).find('td').eq(1).html(),
+                resultRows.eq(i).find('td').eq(2).html(),
+                '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
+                '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
+            ] ).draw();
+        }
     }
     $('#search-result-problem').modal('hide');
     $('#search-result-table-p tr').slice(1).removeClass('info');
@@ -108,7 +111,8 @@ $('#add-contestants-c').click(function(event) {
 //移动题目
 function addRow(add,result){
 	for(var i = 0; i < result.length; i++){
-		add.append('<tr>' + '<td>' + result.eq(i).find('td').eq(0).html() + '</td>' + '<td>' + result.eq(i).find('td').eq(1).html() + '</td>' + '<td>' + result.eq(i).find('td').eq(2).html() + '</td>' + '<td><a href="javascript:void(0);">删除</a></td>' + '</tr>');
+        if(isExisted(null, result.eq(i).find('td').eq(0).html()))
+		  add.append('<tr>' + '<td>' + result.eq(i).find('td').eq(0).html() + '</td>' + '<td>' + result.eq(i).find('td').eq(1).html() + '</td>' + '<td>' + result.eq(i).find('td').eq(2).html() + '</td>' + '<td><a href="javascript:void(0);">删除</a></td>' + '</tr>');
 	}
 	addDelete();
 }
@@ -132,7 +136,7 @@ function addPResult(data){
         h += '<tr>' + '<td>' + data[i].code + '</td>' + '<td class="overflow-hide">' + data[i].title + '</td>' + '<td class="overflow-hide">' + data[i].description + '</td>' + '</tr>';
     }
     console.log(h);
-    $('#search-result-table-p').append(h);
+    $('#search-result-table-p').find('tbody').html(h);
     multicheck_p();
     addDelete();
 }
@@ -146,10 +150,44 @@ function addPResult(data){
 function addCResult(data){
     var h = "";
     for(var i = 0; i < data.length; i++){
-        h += '<tr>' + '<td>' + data[i].number + '</td>' + '<td>' + data[i].name + '</td>' + '<td>' + data[i].class + '</td>' + '</tr>';
+        h += '<tr>' + '<td>' + data[i].username + '</td>' + '<td>' + data[i].name + '</td>' + '<td>' + data[i].class + '</td>' + '</tr>';
     }
     console.log(h);
-    $('#search-result-table-c').append(h);
+    $('#search-result-table-c').find('tbody').html(h);
     multicheck_c();
     addDelete();
+}
+function isExisted(table, str){
+    if(table == null){
+        console.log(str);
+        var add = $('#contestant-table').find('tr');
+        var I = add.length;
+        var i = 0;
+        for(i = 1; i < I; i++){
+            // console.log(add.eq(i).find('td').eq(0).html());
+            if(add.eq(i).find('td').eq(0).html() == str)
+                break;
+        }
+        if(i < I){
+            return false;
+        } else {
+            return true;
+        }
+        //console.log(i);
+    }
+    else {
+        var array = table.columns(0).data()[0];
+        // console.log(array.length + '-----------');
+        var i = 0;
+        var I = array.length
+        for(i = 0; i < I; i++){
+            // console.log(array[i]);
+            if(array[i] == str)
+                break;
+        }
+        if(i < I)
+            return false;
+        else
+            return true;
+    }
 }

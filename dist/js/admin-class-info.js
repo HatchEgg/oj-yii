@@ -43,7 +43,8 @@ $('#add-students-m').click(function(event) {
 //移动题目
 function addRow(add,result){
 	for(var i = 0; i < result.length; i++){
-		add.append('<tr>' + '<td>' + result.eq(i).find('td').eq(0).html() + '</td>' + '<td>' + result.eq(i).find('td').eq(1).html() + '</td>' + '<td><a href="javascript:void(0);">删除</a></td>' + '</tr>');
+        if(isExisted(add, result.eq(i).find('td').eq(0).html()))
+		  add.append('<tr>' + '<td>' + result.eq(i).find('td').eq(0).html() + '</td>' + '<td>' + result.eq(i).find('td').eq(1).html() + '</td>' + '<td><a href="javascript:void(0);">删除</a></td>' + '</tr>');
 	}
 	addDelete();
 }
@@ -70,4 +71,21 @@ function addResult(data){
     $('#search-result-table-m').find('tbody').append(h);
     addSelect();
     addDelete();
+}
+function isExisted(target, str){
+    // console.log(str);
+    var add = target.find('tr');
+    var I = add.length;
+    var i = 0;
+    for(i = 0; i < I; i++){
+        // console.log(add.eq(i).find('td').eq(0).html());
+        if(add.eq(i).find('td').eq(0).html() == str)
+            break;
+    }
+    if(i < I){
+        return false;
+    } else {
+        return true;
+    }
+    //console.log(i);
 }
