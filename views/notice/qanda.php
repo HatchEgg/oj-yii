@@ -7,7 +7,7 @@
     <div class="col-lg-12">
           <div class="panel panel-defaule">
               <div class="panel-body">
-                  <textarea id="Q-and-A-content" autofocus></textarea>
+                  <textarea class="form-control" id="Q-and-A-content" autofocus></textarea>
               </div>
           </div>
       </div>
