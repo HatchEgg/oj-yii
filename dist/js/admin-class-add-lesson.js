@@ -1,3 +1,4 @@
+console.log("add lesson");
 //添加题目全选
 $('.daterangepicker').remove();
 function checkAll() {

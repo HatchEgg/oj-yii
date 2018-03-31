@@ -88,6 +88,7 @@ function removeRow(id){
 //  addResult(data);
 // });
 function addResult(data){
+    $('#search-result-table-m').find('tbody').html('');
     var h = "";
     for(var i = 0; i < data.length; i++){
         h += '<tr>' + '<td>' + data[i].code + '</td>' + '<td class="overflow-hide">' + data[i].title + '</td>' + '<td class="overflow-hide">' + data[i].description + '</td>' + '</tr>';

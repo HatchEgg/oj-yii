@@ -1,3 +1,4 @@
+console.log("lesson edit");
 //添加题目全选
 $('.daterangepicker').remove();
 function checkAll() {
@@ -14,13 +15,13 @@ function multicheck_p(){
     });
 }
 //Load datarangepicker
-$('#lesson-time').daterangepicker(
+$('#add-lesson-time').daterangepicker(
 {
     locale: {
       format: 'YYYY-MM-DD'
     },
-   // startDate: moment().subtract(29, 'days'),
-   // endDate: moment()
+    startDate: moment().subtract(29, 'days'),
+    endDate: moment()
 }, 
 function(start, end, label) {
     //alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
@@ -30,22 +31,21 @@ function(start, end, label) {
 //lesson problem search selected
 var lpSelected = "ID";
 $('#lesson-select').change(function(event) {
-	var option = $('#lesson-select option:selected');
-	if(option.text() == "ID"){
-		lpSelected = "ID";
-	}
-	else if(option.text() == "Title"){
-		lpSelected = "Title";
-	}
-	else if(option.text() == "Content"){
-		lpSelected = "Content";
-	}
+    var option = $('#lesson-select option:selected');
+    if(option.text() == "ID"){
+        lpSelected = "ID";
+    }
+    else if(option.text() == "Title"){
+        lpSelected = "Title";
+    }
+    else if(option.text() == "Content"){
+        lpSelected = "Content";
+    }
 });
 $('#lesson-search-button').click(function(event) {
-	var searchInput = $("#lesson-search").text();
+    var searchInput = $("#lesson-search").text();
 });
 */
-
 var lessonProblemTable = $('#lesson-problem-table').DataTable({
     responsive: true,
     createdRow: function(row,data,index) {
@@ -63,13 +63,15 @@ $('#add-problems-m').click(function(event) {
     var resultRows = searchResult.find('.info');
     //alert(resultRows.html());
     for(var i = 0; i < resultRows.length; i++){
-        lessonProblemTable.row.add( [
-            resultRows.eq(i).find('td').eq(0).html(),
-            resultRows.eq(i).find('td').eq(1).html(),
-            resultRows.eq(i).find('td').eq(2).html(),
-            '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
-            '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
-        ] ).draw();
+        if(isExisted(lessonProblemTable,resultRows.eq(i).find('td').eq(0).html())){
+            lessonProblemTable.row.add( [
+                resultRows.eq(i).find('td').eq(0).html(),
+                resultRows.eq(i).find('td').eq(1).html(),
+                resultRows.eq(i).find('td').eq(2).html(),
+                '<a style="cursor:pointer" type="button" onClick="removeRow(\'#'+resultRows.eq(i).find('td').eq(0).html().toString()+'\')">移除</a>',
+                '<label class="radio-inline"><input name="0001" id="0001-a" value="aviliable" checked="" type="radio">可用</label><label class="radio-inline"><input name="0001" id="0001-b" value="aviliable" checked="" type="radio">不可用</label>'
+            ] ).draw();
+        }
     }
     $('#search-result').modal('hide');
     $('#search-result-table-m tr').slice(1).removeClass('info');
@@ -90,9 +92,21 @@ function addResult(data){
     for(var i = 0; i < data.length; i++){
         h += '<tr>' + '<td>' + data[i].code + '</td>' + '<td class="overflow-hide">' + data[i].title + '</td>' + '<td class="overflow-hide">' + data[i].description + '</td>' + '</tr>';
     }
-    console.log(h);
     $('#search-result-table-m').find('tbody').append(h);
     multicheck_p();
 }
-
-multicheck_p();
+function isExisted(table, str){
+    var array = table.columns(0).data()[0];
+    // console.log(array.length + '-----------');
+    var i = 0;
+    var I = array.length
+    for(i = 0; i < I; i++){
+        // console.log(array[i]);
+        if(array[i] == str)
+            break;
+    }
+    if(i < I)
+        return false;
+    else
+        return true;
+}
